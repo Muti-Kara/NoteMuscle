@@ -1,3 +1,6 @@
 [submodule "ocr"]
 	path = ocr
 	url = https://github.com/Muti-Kara/text_reader
+[submodule "NotesMuscleServer"]
+	path = NotesMuscleServer
+	url = https://github.com/MatErW3lon/NotesMuscleServer.git
