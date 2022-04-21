@@ -1,0 +1,3 @@
+[submodule "ocr"]
+	path = ocr
+	url = https://github.com/Muti-Kara/text_reader
