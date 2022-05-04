@@ -1,2 +1,0 @@
-implement logout if the server closes
-do not write your personal to do lists ??? LOL
