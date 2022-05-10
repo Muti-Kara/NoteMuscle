@@ -39,7 +39,6 @@ public class Processing_Queue extends Thread{
                 if(ocr_ClientSocket == null){
                     continue;
                 }
-                System.out.println("HERE");
                 DataInputStream dataInputStream = ocr_ClientSocket.getInputStream();
                 DataOutputStream dataOutputStream = ocr_ClientSocket.getOutputStream();
                 try {
@@ -48,7 +47,8 @@ public class Processing_Queue extends Thread{
                     dataInputStream.readFully(img_bytes);
                     ByteArrayInputStream bis = new ByteArrayInputStream(img_bytes);
                     BufferedImage bImage = ImageIO.read(bis);
-                    ImageIO.write(bImage, "png", new File(System.getProperty("user.dir") + "\\image_buffer\\inprocess.png"));
+                    File in_process_img_file = new File(System.getProperty("user.dir") + "\\image_buffer\\inprocess.png");
+                    ImageIO.write(bImage, "png", in_process_img_file);
 
                     //after image to text conversion
                     String img_to_txt = new String(testStrings(), StandardCharsets.UTF_8);
@@ -56,6 +56,11 @@ public class Processing_Queue extends Thread{
                     dataOutputStream.flush();
                     //after processing end the request
                     ocr_ClientSocket.closeEverything();
+
+                    //delete the buffered image file
+                    if(in_process_img_file.exists()){
+                        in_process_img_file.delete();
+                    }
 
                 } catch (IOException e) {
                     ocr_ClientSocket.closeEverything();
