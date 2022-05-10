@@ -15,6 +15,7 @@ import java.io.File;
 public class Processing_Queue extends Thread{
     
     Queue<OCR_ClientSocket> processing_queue; //must be synchronised
+    Server_Process_Interface image_processor;
     
     public Processing_Queue(){
         processing_queue = new LinkedList<OCR_ClientSocket>();
@@ -47,11 +48,12 @@ public class Processing_Queue extends Thread{
                     dataInputStream.readFully(img_bytes);
                     ByteArrayInputStream bis = new ByteArrayInputStream(img_bytes);
                     BufferedImage bImage = ImageIO.read(bis);
-                    File in_process_img_file = new File(System.getProperty("user.dir") + "\\image_buffer\\inprocess.png");
+                    File in_process_img_file = new File(Server_Process_Interface.IMG_PATH);
                     ImageIO.write(bImage, "png", in_process_img_file);
 
                     //after image to text conversion
-                    String img_to_txt = new String(testStrings(), StandardCharsets.UTF_8);
+                    //String img_to_txt = new String(testStrings(), StandardCharsets.UTF_8);
+                    String img_to_txt = image_processor.getProcessedString();
                     dataOutputStream.writeUTF(img_to_txt);
                     dataOutputStream.flush();
                     //after processing end the request
