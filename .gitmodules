@@ -7,3 +7,6 @@
 [submodule "Notes_Muscles"]
 	path = Notes_Muscles
 	url = https://github.com/MatErW3lon/Notes_Muscles.git
+[submodule "NotesMuscleDocumentationWebsite"]
+	path = NotesMuscleDocumentationWebsite
+	url = https://github.com/MatErW3lon/NotesMuscleDocumentationWebsite.git
